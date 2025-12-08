@@ -1,13 +1,11 @@
 import { Input } from "@/components/ui/input";
-import { useAuthStore } from "@/store/authStore";
-import { useRouter } from "expo-router";
 import React from "react";
 import { Image, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Login() {
-  const router = useRouter();
-  const login = useAuthStore((state) => state.login);
+  // const router = useRouter();
+  // const login = useAuthStore((state) => state.login);
 
   // const handleLogin = () => {
   //   login();
