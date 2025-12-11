@@ -28,7 +28,7 @@ const Button: FC<IProps> = ({
   return (
     <TouchableOpacity
       className={cn(
-        isOutline ? "border border-outline" : "bg-primary-default",
+        isOutline ? "border border-outline" : "bg-primary",
         "flex-row items-center justify-center gap-x-2.5 rounded-xl py-3.5 px-2.5",
         className
       )}

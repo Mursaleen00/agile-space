@@ -8,10 +8,7 @@ import { StatusBar } from "expo-status-bar";
 import "react-native-reanimated";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
-SplashScreen.setOptions({
-  duration: 5000,
-  fade: true,
-});
+SplashScreen.setOptions({ duration: 1000, fade: true });
 
 export default function RootLayout() {
   return (
