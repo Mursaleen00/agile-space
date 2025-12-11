@@ -5,7 +5,7 @@ import { Image, ImageBackground, View } from "react-native";
 
 export default function SplashScreen() {
   const router = useRouter();
-  const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
+  const isLoggedIn = useAuthStore((state) => state.token);
 
   useEffect(() => {
     const timer = setTimeout(() => {

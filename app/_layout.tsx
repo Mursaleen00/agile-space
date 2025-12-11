@@ -1,3 +1,4 @@
+import Providers from "@/Providers";
 import "@/styles/global.css";
 
 import { DefaultTheme, ThemeProvider } from "@react-navigation/native";
@@ -16,12 +17,14 @@ export default function RootLayout() {
   return (
     <ThemeProvider value={DefaultTheme}>
       <SafeAreaProvider>
-        <Stack screenOptions={{ headerShown: false }}>
-          <Stack.Screen name="(splash)/index" />
-          <Stack.Screen name="(auth)" />
-          <Stack.Screen name="home" />
-        </Stack>
-        <StatusBar style="auto" />
+        <Providers>
+          <Stack screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="(splash)/index" />
+            <Stack.Screen name="(auth)" />
+            <Stack.Screen name="home" />
+          </Stack>
+          <StatusBar style="auto" />
+        </Providers>
       </SafeAreaProvider>
     </ThemeProvider>
   );

@@ -1,11 +1,13 @@
 import { cn } from "@/lib/utils";
 
-import React, { FC, ReactNode } from "react";
+import React, { FC, Fragment, ReactNode } from "react";
 import { Text, TouchableOpacity } from "react-native";
+import { Bounce } from "react-native-animated-spinkit";
 
 interface IProps {
   textClassName?: string;
   onPress?: () => void;
+  isPending?: boolean;
   isOutline?: boolean;
   disabled?: boolean;
   className?: string;
@@ -20,6 +22,7 @@ const Button: FC<IProps> = ({
   disabled,
   isOutline,
   className,
+  isPending,
   textClassName,
 }) => {
   return (
@@ -32,16 +35,22 @@ const Button: FC<IProps> = ({
       onPress={onPress}
       disabled={disabled}
     >
-      <Text
-        className={cn(
-          "text-lg font-semibold",
-          isOutline ? "text-text" : "text-white",
-          textClassName
-        )}
-      >
-        {text}
-      </Text>
-      {icon}
+      {isPending ? (
+        <Bounce size={25} color={isOutline ? "#0FA6A2" : "white"} />
+      ) : (
+        <Fragment>
+          <Text
+            className={cn(
+              "text-lg font-semibold",
+              isOutline ? "text-text" : "text-white",
+              textClassName
+            )}
+          >
+            {text}
+          </Text>
+          {icon}
+        </Fragment>
+      )}
     </TouchableOpacity>
   );
 };

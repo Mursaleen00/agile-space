@@ -1,19 +1,36 @@
 import Button from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { SignInSchema } from "@/schema/sign-in.schema";
+import { useLoginMutation } from "@/services/react-query/auth/login-mutation";
+import { useAuthStore } from "@/store/authStore";
 import { Fontisto } from "@expo/vector-icons";
-import { Link } from "expo-router";
+import { Link, useRouter } from "expo-router";
 import { useFormik } from "formik";
 import React from "react";
 import { Image, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Login() {
+  const { push } = useRouter();
+  const { mutateAsync } = useLoginMutation();
+  const { setUser } = useAuthStore((state) => state);
+
   const { handleChange, isSubmitting, handleSubmit, errors, touched, values } =
     useFormik({
-      validationSchema: { SignInSchema },
-      initialValues: { email: "", password: "" },
-      onSubmit: (values) => console.log("🚀 ~ Login ~ values:", values),
+      validationSchema: SignInSchema,
+      initialValues: {
+        email: "",
+        password: "",
+      },
+      onSubmit: async (payload) => {
+        try {
+          const res = await mutateAsync(payload);
+          setUser(res);
+          push("/home");
+        } catch (error) {
+          console.log("🚀 ~ Login ~ error:", error);
+        }
+      },
     });
 
   return (
@@ -57,6 +74,7 @@ export default function Login() {
               text="Log in"
               onPress={handleSubmit}
               disabled={isSubmitting}
+              isPending={isSubmitting}
             />
 
             <Button
